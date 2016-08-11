@@ -30,9 +30,11 @@ function nodeConstructor(value) {
 // min - if list contains numbers, returns the minimum number in the list √
 // avg - if list contains numbers, returns the average of numbers in the list √
 // printList - returns a string with all the elements in the list  √
+// reverse - reverses the list
+// shiftBy - shifts the list right if positive values, and left if negative values
 
 
-function listConstructor() {
+function SLlistConstructor() {
 	// properties
 	this.head = null;
 	var length = 0;
@@ -254,7 +256,7 @@ function listConstructor() {
 
 
 // Main Program
-var myList = new listConstructor();
+var myList = new SLlistConstructor();
 myList.addFront(10).addFront(20).addFront(30).addFront(40);
 myList.printList();
 myList.addBack(100).addBack(1000).addBack(5000);
