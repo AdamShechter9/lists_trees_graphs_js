@@ -2,12 +2,15 @@
 // by Adam Shechter
 // August, 2016
 
-// NodeConstructor 
+// DLnodeConstructor 
 // properties:
 // .value - value of node
 // .next  - reference to next node
 // .prev  - reference to previous node
-function nodeConstructor(value) {
+function DLnodeConstructor(value) {
+	if (!(this instanceof DLnodeConstructor)) {
+		return new DLnodeConstructor(value);
+	}
 	this.value = value || null;
 	this.prev = null;
 	this.next = null;
@@ -38,6 +41,9 @@ function nodeConstructor(value) {
 
 
 function DLlistConstructor() {
+	if (!(this instanceof DLlistConstructor)) {
+		return new DLlistConstructor();
+	}
 	// properties
 	this.head = null;
 	this.tail = null;
@@ -56,7 +62,7 @@ function DLlistConstructor() {
 // Prototype Functions
 DLlistConstructor.prototype.addBack = function (value) {
 	// add node to the back of the list.
-	var newNode = new nodeConstructor(value);
+	var newNode = new DLnodeConstructor(value);
 	// empty list
 	if (!this.tail) {
 		this.head = newNode;
@@ -95,7 +101,7 @@ DLlistConstructor.prototype.removeBack = function () {
 }
 DLlistConstructor.prototype.addFront = function (value) {
 	// add node to the front of the list.
-	var newNode = new nodeConstructor(value);
+	var newNode = new DLnodeConstructor(value);
 	if (!this.head) {
 		this.head = newNode;
 		this.tail = newNode;
@@ -232,7 +238,7 @@ DLlistConstructor.prototype.insertAtIndex = function (indexIn, value) {
 		return this.addBack();
 	}
 	runner = this.nodeAtIndex(index);
-	newNode = new nodeConstructor(value);
+	newNode = new DLnodeConstructor(value);
 	newNode.next = runner;
 	newNode.prev = runner.prev;
 	runner.prev.next = newNode;

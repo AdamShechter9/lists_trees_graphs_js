@@ -2,11 +2,14 @@
 // by Adam Shechter
 // August, 2016
 
-// NodeConstructor 
+// SLnodeConstructor 
 // properties:
 // .value - value of node
 // .next  - reference to next node
-function nodeConstructor(value) {
+function SLnodeConstructor(value) {
+	if (!(this instanceof SLnodeConstructor)) {
+		return new SLnodeConstructor(value);
+	}
 	this.value = value || null;
 	this.next = null;
 }
@@ -36,6 +39,9 @@ function nodeConstructor(value) {
 
 
 function SLlistConstructor() {
+	if (!(this instanceof SLlistConstructor)) {
+		return new SLlistConstructor();
+	}
 	// properties
 	this.head = null;
 	var length = 0;
@@ -53,7 +59,7 @@ function SLlistConstructor() {
 // Prototype Functions
 SLlistConstructor.prototype.addBack = function (value) {
 	// add node to the back of the list.
-	var newNode = new nodeConstructor(value);
+	var newNode = new SLnodeConstructor(value);
 	var runner = this.head;
 	// empty list
 	if (!runner) {
@@ -95,7 +101,7 @@ SLlistConstructor.prototype.removeBack = function () {
 }
 SLlistConstructor.prototype.addFront = function (value) {
 	// add node to the front of the list.
-	var newNode = new nodeConstructor(value);
+	var newNode = new SLnodeConstructor(value);
 	newNode.next = this.head;
 	this.head = newNode;
 	this.length(1);
@@ -194,7 +200,7 @@ SLlistConstructor.prototype.insertAtIndex = function (indexIn, value) {
 		return this.addBack();
 	}
 	runner = this.nodeAtIndex(index - 1);
-	newNode = new nodeConstructor(value);
+	newNode = new SLnodeConstructor(value);
 	newNode.next = runner.next;
 	runner.next = newNode;
 	this.length(1);
