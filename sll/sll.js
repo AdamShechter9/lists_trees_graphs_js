@@ -23,6 +23,7 @@ function nodeConstructor(value) {
 // addFront - takes a value and adds a node to the front of the list  
 // removeFront - removes a node from the front of the list and returns it  
 // contains - returns true if value is found in the list  
+// nodeAtIndex - returns reference to node at given index
 // valueAtIndex - takes an index value and returns the value at the node  
 // removeAtIndex - removes a value at given index number and returns value  
 // insertAtIndex - takes a value and inserts a node at given index in the list  
@@ -47,18 +48,6 @@ function SLlistConstructor() {
 		length = length + lengthChange;
 		// console.log("post length is ", length);
 		return length;
-	}
-	this.printList = function () {
-		var runner = this.head;
-		var index = 0;
-		console.log("start: ");
-		while (runner) {
-			console.log(index, runner.value);
-			runner = runner.next;
-			index += 1;
-		}
-		console.log("end: ");
-		return this;
 	}
 }
 // Prototype Functions
@@ -138,7 +127,7 @@ SLlistConstructor.prototype.contains = function (value) {
 	}
 	return false;
 }
-SLlistConstructor.prototype.valueAtIndex = function (indexIn) {
+SLlistConstructor.prototype.nodeAtIndex = function (indexIn) {
 	// default to 0 if no index argument
 	var index = indexIn || 0;
 	var runner = this.head;
@@ -151,6 +140,17 @@ SLlistConstructor.prototype.valueAtIndex = function (indexIn) {
 		runner = runner.next;
 		i += 1;
 	}
+	return runner;
+}
+SLlistConstructor.prototype.valueAtIndex = function (indexIn) {
+	// default to 0 if no index argument
+	var index = indexIn || 0;
+	var runner;
+	var length = this.length();
+	if ((!this.head) || (index >= length)) {
+		return null;
+	}
+	runner = this.nodeAtIndex(index);
 	return runner.value;
 }
 SLlistConstructor.prototype.removeAtIndex = function (indexIn) {
@@ -169,10 +169,7 @@ SLlistConstructor.prototype.removeAtIndex = function (indexIn) {
 		// remove last element in the list
 		return this.removeBack();
 	}
-	while (i < (index - 1)) {
-		runner = runner.next;
-		i += 1;
-	}
+	runner = this.nodeAtIndex(index - 1);
 	value = runner.next.value;
 	runner.next = runner.next.next;
 	this.length(-1);
@@ -194,12 +191,9 @@ SLlistConstructor.prototype.insertAtIndex = function (indexIn, value) {
 		return this.addFront(value);
 	} else if (index == (length - 1)) {
 		// adds node as element in the list
-		return this.removeBack();
+		return this.addBack();
 	}
-	while (i < (index - 1)) {
-		runner = runner.next;
-		i += 1;
-	}
+	runner = this.nodeAtIndex(index - 1);
 	newNode = new nodeConstructor(value);
 	newNode.next = runner.next;
 	runner.next = newNode;
@@ -298,8 +292,8 @@ SLlistConstructor.prototype.shiftBy = function (shiftAmount) {
 		return this;
 	}
 	for (var i = 0; i < Math.abs(shiftAmount); i += 1) {
+		runner = this.head;
 		if (shiftAmount > 0) {
-			runner = this.head;
 			while (runner.next.next) {
 				runner = runner.next;
 			}
@@ -307,7 +301,6 @@ SLlistConstructor.prototype.shiftBy = function (shiftAmount) {
 			this.head = runner.next;
 			runner.next = null;
 		} else {
-			runner = this.head;
 			while (runner.next) {
 				runner = runner.next;
 			}
@@ -318,7 +311,19 @@ SLlistConstructor.prototype.shiftBy = function (shiftAmount) {
 	}
 	return this;
 }
-
+SLlistConstructor.prototype.printList = function () {
+	var runner = this.head;
+	var index = 0;
+	console.log("start: ");
+	while (runner) {
+		console.log(index, runner.value);
+		runner = runner.next;
+		index += 1;
+	}
+	console.log("end: ");
+	console.log("head", this.head.value);
+	return this;
+}
 // Main Program
 var myList = new SLlistConstructor();
 myList.addFront(10).addFront(20).addFront(30).addFront(40);
