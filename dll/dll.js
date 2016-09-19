@@ -16,7 +16,7 @@ function DLnodeConstructor(value) {
 	this.next = null;
 }
 
-// listConstructor
+// DLlistConstructor
 // PROPERTIES:
 // .head - reference to head of the list
 // length - number of nodes in our list
@@ -74,7 +74,7 @@ DLlistConstructor.prototype.addBack = function (value) {
 	}
 	this.length(1);
 	return this;
-}
+};
 DLlistConstructor.prototype.removeBack = function () {
 	// remove node from back of the list. returns value;
 	var value, tempRef;
@@ -98,7 +98,7 @@ DLlistConstructor.prototype.removeBack = function () {
 	}
 	this.length(-1);
 	return value;
-}
+};
 DLlistConstructor.prototype.addFront = function (value) {
 	// add node to the front of the list.
 	var newNode = new DLnodeConstructor(value);
@@ -112,7 +112,7 @@ DLlistConstructor.prototype.addFront = function (value) {
 	}
 	this.length(1);
 	return this;
-}
+};
 DLlistConstructor.prototype.removeFront = function () {
 	// removes a node from the front of the list.  returns the value.
 	var value, tempRef;
@@ -134,7 +134,7 @@ DLlistConstructor.prototype.removeFront = function () {
 	}
 	this.length(-1);
 	return value;
-}
+};
 DLlistConstructor.prototype.contains = function (value) {
 	// search for value in list.  if found, return true. else, return false;
 	// utilizes two runners, so search time is O(N/2),
@@ -152,7 +152,7 @@ DLlistConstructor.prototype.contains = function (value) {
 		runner2 = runner2.prev;
 	}
 	return false;
-}
+};
 DLlistConstructor.prototype.nodeAtIndex = function (indexIn) {
 	// default to 0 if no index argument
 	// if index is greater than half, uses tail to move backwards.
@@ -178,7 +178,7 @@ DLlistConstructor.prototype.nodeAtIndex = function (indexIn) {
 		}
 	}
 	return runner;
-}
+};
 DLlistConstructor.prototype.valueAtIndex = function (indexIn) {
 	// default to 0 if no index argument
 	// if index is greater than half, uses tail to move backwards.
@@ -190,13 +190,13 @@ DLlistConstructor.prototype.valueAtIndex = function (indexIn) {
 	}
 	runner = this.nodeAtIndex(index);
 	return runner.value;
-}
+};
 DLlistConstructor.prototype.removeAtIndex = function (indexIn) {
 	// default to 0 if no index argument
 	// if index is greater than half, uses tail to move backwards.
 	var index = indexIn || 0;
 	var value, tempRef;
-	var runner, i;
+	var runner;
 	var length = this.length();
 	if ((!this.head) || (index >= length)) {
 		return null;
@@ -217,13 +217,13 @@ DLlistConstructor.prototype.removeAtIndex = function (indexIn) {
 	runner.prev = null;
 	this.length(-1);
 	return value;
-}
+};
 
 DLlistConstructor.prototype.insertAtIndex = function (indexIn, value) {
 	// default to 0 if no index argument
 	// if index is greater than half, uses tail to move backwards.
 	var index = indexIn || 0;
-	var runner, i;
+	var runner;
 	var newNode;
 	var length = this.length();
 
@@ -245,7 +245,7 @@ DLlistConstructor.prototype.insertAtIndex = function (indexIn, value) {
 	runner.prev = newNode;
 	this.length(1);
 	return this;	
-}
+};
 DLlistConstructor.prototype.max = function () {
 	var max;
 	var runner = this.head, runner2 = this.tail;
@@ -269,7 +269,7 @@ DLlistConstructor.prototype.max = function () {
 	}
 	max = runner.value > max ? runner.value : max;
 	return max;
-}
+};
 DLlistConstructor.prototype.min = function () {
 	var min;
 	var runner = this.head, runner2 = this.tail;
@@ -293,7 +293,7 @@ DLlistConstructor.prototype.min = function () {
 	}
 	min = runner.value < min ? runner.value : min;
 	return min;
-}
+};
 DLlistConstructor.prototype.avg = function () {
 	var sum, avg;
 	var runner = this.head, runner2 = this.tail;
@@ -321,7 +321,7 @@ DLlistConstructor.prototype.avg = function () {
 	}
 	avg = sum / length;
 	return avg;
-}
+};
 DLlistConstructor.prototype.reverse = function () {
 	// two ways to go about this.
 	// first is to start reversing the pointers starting for the last node to the first.
@@ -331,8 +331,6 @@ DLlistConstructor.prototype.reverse = function () {
 	// this takes O(N/2) times.  
 	// This uses length to determine how far down to go and swap values.
 	var runner = this.head, runner2 = this.tail;
-	var length = this.length();
-	var i = 0;
 	var swapVal;
 	if (!this.head) {
 		return null;
@@ -348,9 +346,8 @@ DLlistConstructor.prototype.reverse = function () {
 		runner2 = runner2.prev;
 	}
 	return this;
-}
+};
 DLlistConstructor.prototype.shiftBy = function (shiftAmount) {
-	var runner;
 
 	if (!this.head) {
 		return null;
@@ -374,7 +371,7 @@ DLlistConstructor.prototype.shiftBy = function (shiftAmount) {
 		}	
 	}
 	return this;
-}
+};
 DLlistConstructor.prototype.printList = function () {
 	var runner = this.head;
 	var index = 0;
@@ -388,9 +385,9 @@ DLlistConstructor.prototype.printList = function () {
 	console.log("head", this.head.value);
 	console.log("tail", this.tail.value);
 	return this;
-}
+};
 
-// Main Program
+// Main Body - testing
 var myList = new DLlistConstructor();
 myList.addFront(10).addFront(20).addFront(30).addFront(40);
 myList.printList();

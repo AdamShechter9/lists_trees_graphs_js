@@ -1,4 +1,4 @@
-// single linked list implementation in JavaScript.
+// Single linked list implementation in JavaScript.
 // by Adam Shechter
 // August, 2016
 
@@ -14,7 +14,7 @@ function SLnodeConstructor(value) {
 	this.next = null;
 }
 
-// listConstructor
+// SLlistConstructor
 // PROPERTIES:
 // .head - reference to head of the list
 // length - number of nodes in our list
@@ -73,7 +73,7 @@ SLlistConstructor.prototype.addBack = function (value) {
 	}
 	this.length(1);
 	return this;
-}
+};
 SLlistConstructor.prototype.removeBack = function () {
 	// remove node from back of the list. returns value;
 	var runner = this.head;
@@ -98,7 +98,7 @@ SLlistConstructor.prototype.removeBack = function () {
 	}
 	this.length(-1);
 	return value;
-}
+};
 SLlistConstructor.prototype.addFront = function (value) {
 	// add node to the front of the list.
 	var newNode = new SLnodeConstructor(value);
@@ -106,7 +106,7 @@ SLlistConstructor.prototype.addFront = function (value) {
 	this.head = newNode;
 	this.length(1);
 	return this;
-}
+};
 SLlistConstructor.prototype.removeFront = function () {
 	// removes a node from the front of the list.  returns the value.
 	var value;
@@ -117,7 +117,7 @@ SLlistConstructor.prototype.removeFront = function () {
 	this.head = this.head.next;
 	this.length(-1);
 	return value;
-}
+};
 SLlistConstructor.prototype.contains = function (value) {
 	// search for value in list.  if found, return true. else, return false;
 	var runner = this.head;
@@ -132,7 +132,7 @@ SLlistConstructor.prototype.contains = function (value) {
 		runner = runner.next;
 	}
 	return false;
-}
+};
 SLlistConstructor.prototype.nodeAtIndex = function (indexIn) {
 	// default to 0 if no index argument
 	var index = indexIn || 0;
@@ -147,7 +147,7 @@ SLlistConstructor.prototype.nodeAtIndex = function (indexIn) {
 		i += 1;
 	}
 	return runner;
-}
+};
 SLlistConstructor.prototype.valueAtIndex = function (indexIn) {
 	// default to 0 if no index argument
 	var index = indexIn || 0;
@@ -158,13 +158,12 @@ SLlistConstructor.prototype.valueAtIndex = function (indexIn) {
 	}
 	runner = this.nodeAtIndex(index);
 	return runner.value;
-}
+};
 SLlistConstructor.prototype.removeAtIndex = function (indexIn) {
 	var index = indexIn || 0;
 	var value;
-	var runner = this.head;
+	var runner;
 	var length = this.length();
-	var i = 0;
 	if ((!this.head) || (index >= length)) {
 		return null;
 	} 
@@ -180,14 +179,13 @@ SLlistConstructor.prototype.removeAtIndex = function (indexIn) {
 	runner.next = runner.next.next;
 	this.length(-1);
 	return value;
-}
+};
 
 SLlistConstructor.prototype.insertAtIndex = function (indexIn, value) {
 	var index = indexIn || 0;
-	var runner = this.head;
+	var runner;
 	var newNode;
 	var length = this.length();
-	var i = 0;
 
 	if ((!this.head) || (index >= length)) {
 		return null;
@@ -205,7 +203,7 @@ SLlistConstructor.prototype.insertAtIndex = function (indexIn, value) {
 	runner.next = newNode;
 	this.length(1);
 	return this;	
-}
+};
 SLlistConstructor.prototype.max = function () {
 	var max;
 	var runner = this.head;
@@ -219,7 +217,7 @@ SLlistConstructor.prototype.max = function () {
 		runner = runner.next;
 	}
 	return max;
-}
+};
 SLlistConstructor.prototype.min = function () {
 	var min;
 	var runner = this.head;
@@ -233,7 +231,7 @@ SLlistConstructor.prototype.min = function () {
 		runner = runner.next;
 	}
 	return min;
-}
+};
 SLlistConstructor.prototype.avg = function () {
 	var sum, avg;
 	var runner = this.head;
@@ -249,7 +247,7 @@ SLlistConstructor.prototype.avg = function () {
 	}
 	avg = sum / length;
 	return avg;
-}
+};
 SLlistConstructor.prototype.reverse = function () {
 	// two ways to go about this.
 	// first is to start reversing the pointers starting for the last node to the first.
@@ -280,7 +278,7 @@ SLlistConstructor.prototype.reverse = function () {
 		runner = runner.next;
 	}
 	return this;
-}
+};
 SLlistConstructor.prototype.shiftBy = function (shiftAmount) {
 	// Two ways to go about this
 	// first is to run a pointer to end of the list. Set the 2nd to last pointer next to null.
@@ -316,7 +314,7 @@ SLlistConstructor.prototype.shiftBy = function (shiftAmount) {
 		}	
 	}
 	return this;
-}
+};
 SLlistConstructor.prototype.printList = function () {
 	var runner = this.head;
 	var index = 0;
@@ -329,8 +327,8 @@ SLlistConstructor.prototype.printList = function () {
 	console.log("end: ");
 	console.log("head", this.head.value);
 	return this;
-}
-// Main Program
+};
+// Main Body - testing
 var myList = new SLlistConstructor();
 myList.addFront(10).addFront(20).addFront(30).addFront(40);
 myList.printList();

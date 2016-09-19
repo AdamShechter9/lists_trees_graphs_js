@@ -2,7 +2,7 @@
 // by Adam Shechter
 // August, 2016
 
-// NodeConstructor 
+// BTNodeConstructor
 // properties:
 // .value - value of node
 // .left  - reference to child node left
@@ -34,7 +34,7 @@ function BSTConstructor() {
 // BST Prototype methods
 BSTConstructor.prototype.isEmpty = function () {
 	return (this.root == null);
-}
+};
 BSTConstructor.prototype.add = function (value) {
 	// adding nodes to a Binary Search tree.
 	var newValue = value || null;
@@ -48,7 +48,7 @@ BSTConstructor.prototype.add = function (value) {
 		return this;
 	}
 	if (!newValue) {
-		console.log("error, no value given.")
+		console.log("error, no value given.");
 		return null;
 	}
 	runner = this.root;
@@ -76,7 +76,7 @@ BSTConstructor.prototype.add = function (value) {
 		}
 	}
 	return this;
-}
+};
 BSTConstructor.prototype.contains = function (value) {
 	var runner;
 	var foundLeafLocation = false;
@@ -99,7 +99,7 @@ BSTConstructor.prototype.contains = function (value) {
 		}
 	}
 	return foundLeafLocation;
-}
+};
 BSTConstructor.prototype.remove = function (value) {
 	// removing nodes from a binary search tree.
 	// In this case, we default to moving left one level, and then keep going right until we find
@@ -201,11 +201,11 @@ BSTConstructor.prototype.remove = function (value) {
 		}
 	}
 	return true;
-}
-BSTConstructor.prototype.size = function (count, node) {
+};
+BSTConstructor.prototype.size = function (countIn, nodeIn) {
 	// recursive function to return size.  passes count by reference.
-	var count = count || [0];
-	var node = node || this.root;
+	var count = countIn || [0];
+	var node = nodeIn || this.root;
 	if (!this.root) {
 		// BST is empty
 		return 0;
@@ -222,12 +222,12 @@ BSTConstructor.prototype.size = function (count, node) {
 	}
 	// return size
 	return count[0]
-}
-BSTConstructor.prototype.heightMax = function (height, node) {
+};
+BSTConstructor.prototype.heightMax = function (heightIn, nodeIn) {
 	// recursive function to return maximum height.
-	var height = height || 0;
+	var height = heightIn || 0;
 	var heightLeft = 0, heightRight = 0;
-	var node = node || this.root;
+	var node = nodeIn || this.root;
 	if (!this.root) {
 		// BST is empty
 		return 0;
@@ -246,12 +246,12 @@ BSTConstructor.prototype.heightMax = function (height, node) {
 	}
 	height = heightLeft > heightRight ? heightLeft : heightRight;
 	return height;
-}
-BSTConstructor.prototype.heightMin = function (height, node) {
+};
+BSTConstructor.prototype.heightMin = function (heightIn, nodeIn) {
 	// recursive function to return minimum height.
-	var height = height || 0;
+	var height = heightIn || 0;
 	var heightLeft = 0, heightRight = 0;
-	var node = node || this.root;
+	var node = nodeIn || this.root;
 	if (!this.root) {
 		// BST is empty
 		return 0;
@@ -270,14 +270,14 @@ BSTConstructor.prototype.heightMin = function (height, node) {
 	}
 	height = heightLeft < heightRight ? heightLeft : heightRight;
 	return height;
-}
-BSTConstructor.prototype.isBalanced = function (node) {
+};
+BSTConstructor.prototype.isBalanced = function (nodeIn) {
 	// a Binary search tree is balanced if height of its left subtree and right subtree 
 	// differ by one at most.
-	var node = node || this.root;
+	var node = nodeIn || this.root;
 	var heightLeftMax = 0, heightRightMax = 0,
 		heightLeftMin = 0, heightRightMin = 0;
-	var isBalanced = false;
+	var isBalanced;
 
 	if (!this.root) {
 		// BST is empty
@@ -297,11 +297,11 @@ BSTConstructor.prototype.isBalanced = function (node) {
 	}
 	isBalanced = (((heightLeftMax - heightLeftMin) <= 1) && ((heightRightMax - heightRightMin) <= 1));
 	return isBalanced;
-}
-BSTConstructor.prototype.min = function (node) {
+};
+BSTConstructor.prototype.min = function (nodeIn) {
 	// recursive function to return minimum value.
 	var min, minLeft, minRight;
-	var node = node || this.root;
+	var node = nodeIn || this.root;
 	if (!this.root) {
 		// BST is empty
 		return 0;
@@ -317,11 +317,11 @@ BSTConstructor.prototype.min = function (node) {
 	min = node.value < minLeft ? node.value : minLeft;
 	min = minRight < min ? minRight : min;
 	return min;
-}
-BSTConstructor.prototype.max = function (node) {
+};
+BSTConstructor.prototype.max = function (nodeIn) {
 	// recursive function to return maximum value.
 	var max, maxLeft, maxRight;
-	var node = node || this.root;
+	var node = nodeIn || this.root;
 	if (!this.root) {
 		// BST is empty
 		return 0;
@@ -337,15 +337,15 @@ BSTConstructor.prototype.max = function (node) {
 	max = node.value > maxLeft ? node.value : maxLeft;
 	max = maxRight > max ? maxRight : max;
 	return max;
-}
-BSTConstructor.prototype.printTree = function (mode, node, outString) {
+};
+BSTConstructor.prototype.printTree = function (modeIn, nodeIn, outStringIn) {
 	// printing the BS Tree contents.
 	// 0 - in order (Node, left, right)
 	// 1 - pre order (left, node, right)
 	// 2 - post order (left, right, node)
-	var mode = mode || 0;
-	var node = node || this.root;
-	var outString = outString || "";
+	var mode = modeIn || 0;
+	var node = nodeIn || this.root;
+	var outString = outStringIn || "";
 	if (!this.root) {
 		// BST is empty
 		return null;
@@ -405,7 +405,7 @@ BSTConstructor.prototype.printTree = function (mode, node, outString) {
 			break;
 	}
 	return outString;
-}
+};
 // Main Body - testing
 var myTree = new BSTConstructor();
 console.log("isempty", myTree.isEmpty());
