@@ -68,7 +68,7 @@ TrieSetConstructor.prototype.contains = function (searchWord) {
 
 TrieSetConstructor.prototype.size = function () {
     return this.trieSize;
-}
+};
 
 TrieSetConstructor.prototype.sizeRecursive = function (countO, node) {
     var countObj = countO || {count: 0};
@@ -82,7 +82,7 @@ TrieSetConstructor.prototype.sizeRecursive = function (countO, node) {
         }
     }
     return countObj.count;
-}
+};
 
 TrieSetConstructor.prototype.insert = function (newWord) {
     if (!newWord || newWord === undefined) {
@@ -184,8 +184,8 @@ TrieSetConstructor.prototype.delete = function (deleteWord) {
         currIndex += 1;
     }
     var deleteNodeHasChildren = false;
-    for (var i = 0; i < this.radixLength; i += 1) {
-        if (runner.children[i]) {
+    for (var j = 0; j < this.radixLength; j += 1) {
+        if (runner.children[j]) {
             deleteNodeHasChildren = true;
             break;
         }
