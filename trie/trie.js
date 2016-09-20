@@ -120,6 +120,36 @@ TrieSetConstructor.prototype.insertRecursive = function (newWord, runnerNode, In
     return this.insertRecursive(word, runner, currIndex);
 };
 
+TrieSetConstructor.prototype.delete = function (deleteWord) {
+    if (!deleteWord || deleteWord === undefined) {
+        return {err: "error in input"};
+    } else if (deleteWord === "") {
+        return null;
+    }
+
+    var runner = this.root;
+    var wordNode = "",
+        word = deleteWord.toLowerCase(),
+        currIndex = 0,
+        currChar;
+    console.log("deleting word", word, "from trie set");
+    while (currIndex < word.length) {
+        currChar = word.charAt(currIndex);
+        //console.log("wordNode", wordNode,"currChar",currChar, "currIndex", currIndex);
+        if (!runner.children[this.radixTable[currChar]]) {
+            runner.children[this.radixTable[currChar]] = new TrieNodeConstructor();
+        }
+        runner = runner.children[this.radixTable[currChar]];
+        wordNode += currChar;
+        currIndex += 1;
+    }
+    if (runner.word) {
+        runner.word = null;
+        return true;
+    } else {
+        return false;
+    }
+};
 
 // Main Body - Testing
 var trie1 = new TrieSetConstructor();
@@ -132,4 +162,6 @@ console.log((trie1.contains("adam")));
 console.log(trie1.contains("wor"));
 console.log(trie1.contains("hel"));
 trie1.insertRecursive("ADAM");
+console.log((trie1.contains("adam")));
+trie1.delete("adam");
 console.log((trie1.contains("adam")));
